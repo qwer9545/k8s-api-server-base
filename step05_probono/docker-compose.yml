@@ -1,0 +1,22 @@
+version: '2'
+services:
+  app:
+    image: app-spring
+    build: .
+    ports:
+      - "80:8080"
+    environment:
+      DB_HOST: db
+      DB_NAME: stc
+      DB_USERNAME: root
+      DB_PASSWORD: rootroot
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootroot
+      MYSQL_DATABASE: stc
+    ports:
+      - "3306:3306"
