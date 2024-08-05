@@ -1,5 +1,5 @@
 server:
-  port: 8989    # server.port=80
+  port: 8999    # server.port=80
   servlet:
     context-path: /probono  # server.servlet.context-path=/probono
 
@@ -9,14 +9,21 @@ management:
       enabled: true
     web:
       exposure:
-        include: prometheus
+        include: health, metrics, prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    prometheus:
+      enabled: true
 
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    url: jdbc:mysql://${DB_HOST}:3306/${DB_NAME}?useSSL=false&allowPublicKeyRetrieval=true
+    username: "root"
+    password: "rootroot"
+    url: jdbc:mysql://mysql-service:3306/stc?useSSL=false&allowPublicKeyRetrieval=true
 #    url: jdbc:mysql://127.0.0.1:3306/${DB_NAME}?useSSL=false&allowPublicKeyRetrieval=true
 #    url: jdbc:mysql://mysqldb:3306/fisa?useSSL=false&allowPublicKeyRetrieval=true
 

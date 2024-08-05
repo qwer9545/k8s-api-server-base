@@ -42,8 +42,11 @@ dependencies {
 	implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api', version: '2.0.0'
 	// https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl
 	implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
-	
-	
+
+	// Prometheus Micrometer
+	implementation 'io.micrometer:micrometer-registry-prometheus'
+	// Spring Boot Actuator for metrics
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 
 tasks.named('test') {

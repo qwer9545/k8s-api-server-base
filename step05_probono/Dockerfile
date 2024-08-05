@@ -15,7 +15,7 @@ COPY build/libs/*.jar /app-spring/app.jar
 ENTRYPOINT ["java", "-jar", "/app-spring/app.jar"]
 
 # 노출시킬 포트 설정
-EXPOSE 8989
+EXPOSE 8999
 
 # 스크립트 실행 허가
 #RUN chmod +x /app-spring/init-container.sh
