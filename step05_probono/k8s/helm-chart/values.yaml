@@ -1,0 +1,26 @@
+# Global values
+global:
+  namespace: "api-base"
+
+# Prometheus configuration
+prometheus:
+  enabled: true
+  configMap:
+    name: prometheus-config
+  service:
+    type: ClusterIP
+    port: 9090
+
+# Grafana configuration
+grafana:
+  enabled: true
+  service:
+    type: ClusterIP
+    port: 3000
+
+# Spring Boot application configuration
+springboot:
+  service:
+    name: springboot-service
+    port: 8999
+    path: /probono/actuator/prometheus

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  # helm 관리로 전환
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    meta.helm.sh/release-name: my-release
+    meta.helm.sh/release-namespace: api-base
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+    scrape_configs:
+      - job_name: 'springboot'
+        metrics_path: '/probono/actuator/prometheus'
+        static_configs:
+          - targets: ['springboot-service:8999']

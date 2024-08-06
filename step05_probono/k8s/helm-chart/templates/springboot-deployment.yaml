@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-app
+  template:
+    metadata:
+      labels:
+        app: springboot-app
+    spec:
+      containers:
+        - name: springboot-container
+          image: qwer9545/app-spring:latest  # Docker 이미지
+          ports:
+            - containerPort: 8999
+          env:
+            - name: DB_HOST
+              value: "mysql-service"
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_NAME # 업데이트
+              value: "stc"
+            - name: DB_USERNAME
+              value: "root"
+            - name: DB_PASSWORD
+              value: "rootroot"
+          readinessProbe:
+            httpGet:
+              path: /probono/actuator/health
+              port: 8999
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /probono/actuator/health
+              port: 8999
+            initialDelaySeconds: 15
+            periodSeconds: 20

@@ -1,0 +1,49 @@
+server:
+  port: 8999    # server.port=80
+  servlet:
+    context-path: /probono  # server.servlet.context-path=/probono
+
+management:
+  endpoints:
+    prometheus:
+      enabled: true
+    web:
+      exposure:
+        include: health, metrics, prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    prometheus:
+      enabled: true
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: "root"
+    password: "rootroot"
+    url: jdbc:mysql://mysql-service:3306/stc?useSSL=false&allowPublicKeyRetrieval=true
+#    url: jdbc:mysql://127.0.0.1:3306/${DB_NAME}?useSSL=false&allowPublicKeyRetrieval=true
+#    url: jdbc:mysql://mysqldb:3306/fisa?useSSL=false&allowPublicKeyRetrieval=true
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        hibernate:
+        "[format_sql]": true            #SQL 보기 좋게 출력
+        "[user_sql_comments]": true     #SQL 생성시 주석 포함
+        "[highlight_sql]": true         #SQL 색깔
+        "[hbm2ddl.auto]": update
+    open-in-view: true
+    show-sql: true
+
+  mvc:        # jsp 사용을 위한 필수 설정, WEB-INF 폴더 직접 만들고, pom.xml에 설정, ProbonoController의 메소드 setViewName()확인하기
+    view:
+      prefix: /WEB-INF/    # spring.mvc.view.prefix: /WEB-INF/
+      suffix: .jsp         # spring.mvc.view.suffix: .jsp
+        
+      
+      
